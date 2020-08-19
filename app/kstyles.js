@@ -1,0 +1,26 @@
+import { Platform } from "react-native";
+import kcolors from "./kcolors";
+
+const defualtText = {
+  color: kcolors.white,
+  fontSize: 17,
+  fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+};
+
+export default {
+  ...kcolors,
+  bgGradient: {
+    backgroundColor: "#000000",
+  },
+  textWhite: {
+    color: kcolors.white,
+  },
+  text: {
+    ...defualtText,
+  },
+  textH1: {
+    ...defualtText,
+    fontWeight: "bold",
+    fontSize: 44,
+  },
+};
