@@ -5,6 +5,7 @@ const defualtText = {
   color: kcolors.white,
   fontSize: 17,
   fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+  fontWeight: "600",
 };
 
 export default {

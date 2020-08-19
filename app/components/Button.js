@@ -3,15 +3,27 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import kstyles from "../kstyles";
 
-const AppButton = ({ title, onPress, style, bgColor, icon }) => (
+const AppButton = ({
+  title,
+  onPress,
+  style,
+  bgColor,
+  icon,
+  smallIcon,
+  lessRadius,
+}) => (
   <TouchableOpacity
-    style={[styles.btn, style, { backgroundColor: bgColor }]}
+    style={[
+      styles.btn,
+      style,
+      { backgroundColor: bgColor, borderRadius: lessRadius ? 12 : 50 },
+    ]}
     onPress={onPress}
   >
     {icon && (
       <MaterialCommunityIcons
         name={icon}
-        size={30}
+        size={smallIcon ? 16 : 30}
         color={kstyles.white}
         style={styles.icon}
       />
@@ -23,7 +35,6 @@ const AppButton = ({ title, onPress, style, bgColor, icon }) => (
 const styles = StyleSheet.create({
   btn: {
     backgroundColor: "transparent",
-    borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
     padding: 12,
