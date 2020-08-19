@@ -9,8 +9,8 @@ const defualtText = {
 
 export default {
   ...kcolors,
-  bgGradient: {
-    backgroundColor: "#000000",
+  bgDarkBlue: {
+    backgroundColor: kcolors.darkBlue,
   },
   bgGray: {
     backgroundColor: kcolors.gray,
