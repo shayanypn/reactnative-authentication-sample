@@ -12,6 +12,9 @@ export default {
   bgGradient: {
     backgroundColor: "#000000",
   },
+  bgGray: {
+    backgroundColor: kcolors.gray,
+  },
   textWhite: {
     color: kcolors.white,
   },
@@ -22,5 +25,10 @@ export default {
     ...defualtText,
     fontWeight: "bold",
     fontSize: 44,
+  },
+  textH3: {
+    ...defualtText,
+    fontWeight: "bold",
+    fontSize: 34,
   },
 };
