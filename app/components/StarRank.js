@@ -8,15 +8,17 @@ const arrayOf = (num) => [...Array(num).keys()];
 
 const StarRank = ({ value, size }) => (
   <View style={styles.container}>
-    {arrayOf(rank(value)).map(() => (
+    {arrayOf(rank(value)).map((item) => (
       <MaterialCommunityIcons
+        key={item}
         name={"star"}
         size={size || 16}
         color={kstyles.orange}
       />
     ))}
-    {arrayOf(5 - rank(value)).map(() => (
+    {arrayOf(5 - rank(value)).map((item) => (
       <MaterialCommunityIcons
+        key={item}
         name={"star"}
         size={size || 16}
         color={kstyles.darkOrange}

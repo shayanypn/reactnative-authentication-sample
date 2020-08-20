@@ -1,73 +1,118 @@
 import React from "react";
-import { StyleSheet, View, ImageBackground, Text } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  ImageBackground,
+  Text,
+  ScrollView,
+  Image,
+} from "react-native";
+import Constants from "expo-constants";
 import AppButton from "../components/Button";
-import Screen from "../components/Screen";
 import kstyles from "../kstyles";
 import StarRank from "../components/StarRank";
 
-const PanelScreen = () => (
-  <Screen>
-    <ImageBackground source={require("../assets/bg.png")} style={styles.head}>
-      <Text style={styles.headTitle}>Child’s pose</Text>
-      <View style={styles.headStatic}>
-        <View>
-          <Text style={styles.headStaticTitle}>Difficulty</Text>
-          <StarRank value={3} />
-        </View>
-        <View>
-          <Text style={styles.headStaticTitle}>Iterations</Text>
-          <Text style={styles.headStaticContent}>10 Sätze</Text>
-        </View>
-        <View>
-          <Text style={styles.headStaticTitle}>Duration</Text>
-          <Text style={styles.headStaticContent}>15 Minuten</Text>
-        </View>
-      </View>
-      <View style={styles.btnList}>
-        <AppButton
-          title="Play video"
-          icon="play-circle"
-          smallIcon
-          lessRadius
-          bgColor={kstyles.secondary}
-        />
-        <AppButton
-          title="Mark as done"
-          icon="check-circle"
-          smallIcon
-          lessRadius
-          bgColor={kstyles.green}
-        />
-      </View>
-    </ImageBackground>
-    <View style={styles.foot}>
-      <AppButton title="Sign In with Apple" icon="apple" />
+const PanelStatics = () => (
+  <View style={styles.headStatic}>
+    <View style={styles.headStaticBox}>
+      <Text style={styles.headStaticTitle}>Difficulty</Text>
+      <StarRank value={3} />
     </View>
-  </Screen>
+    <View style={styles.headStaticBox}>
+      <Text style={styles.headStaticTitle}>Iterations</Text>
+      <Text style={styles.headStaticContent}>10 Sätze</Text>
+    </View>
+    <View style={styles.headStaticBox}>
+      <Text style={styles.headStaticTitle}>Duration</Text>
+      <Text style={styles.headStaticContent}>15 Minuten</Text>
+    </View>
+  </View>
+);
+
+const PanelDescription = () => (
+  <View style={styles.description}>
+    <Text style={styles.descriptionTitle}>Description</Text>
+    <Text style={styles.descriptionText}>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+      voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+      clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+      amet.
+    </Text>
+  </View>
+);
+
+const PanelScreen = () => (
+  <SafeAreaView>
+    <ScrollView>
+      <ImageBackground source={require("../assets/bg.png")} style={styles.head}>
+        <Text style={styles.headTitle}>Child’s pose</Text>
+        <PanelStatics />
+
+        <View style={styles.btnList}>
+          <AppButton
+            title="Play video"
+            icon="play-circle"
+            smallIcon
+            lessRadius
+            bgColor={kstyles.secondary}
+          />
+          <AppButton
+            title="Mark as done"
+            icon="check-circle"
+            smallIcon
+            lessRadius
+            bgColor={kstyles.green}
+          />
+        </View>
+      </ImageBackground>
+      <PanelDescription />
+      <View style={styles.attachments}>
+        <Text style={styles.attachmentsTitle}>Attachments</Text>
+        <View style={styles.attachmentsRow}>
+          <Image
+            style={styles.attachmentsImage}
+            source={require("../assets/image.jpg")}
+          />
+          <Image
+            style={styles.attachmentsImage}
+            source={require("../assets/image.jpg")}
+          />
+        </View>
+        <View style={styles.attachmentsRow}>
+          <Image
+            style={styles.attachmentsImage}
+            source={require("../assets/image.jpg")}
+          />
+          <Image
+            style={styles.attachmentsImage}
+            source={require("../assets/image.jpg")}
+          />
+        </View>
+      </View>
+    </ScrollView>
+  </SafeAreaView>
 );
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   head: {
-    flex: 7,
     justifyContent: "flex-end",
     alignItems: "stretch",
     resizeMode: "contain",
     padding: 10,
-  },
-  foot: {
-    flex: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  headTitle: {
-    ...kstyles.textH3,
-    marginBottom: 20,
+    paddingTop: Constants.statusBarHeight,
   },
   headStatic: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    marginBottom: 20,
+    justifyContent: "flex-start",
+    marginBottom: 10,
+  },
+  headStaticBox: {
+    width: "30%",
   },
   headStaticTitle: {
     ...kstyles.text,
@@ -83,6 +128,48 @@ const styles = StyleSheet.create({
   btnList: {
     display: "flex",
     flexDirection: "column",
+  },
+  description: {
+    display: "flex",
+    padding: 20,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+  },
+  descriptionTitle: {
+    ...kstyles.text,
+    color: kstyles.textDark,
+    marginBottom: 8,
+  },
+  descriptionText: {
+    ...kstyles.text,
+    color: kstyles.textGray,
+    fontSize: 14,
+  },
+  headTitle: {
+    ...kstyles.textH3,
+    marginBottom: 20,
+    marginTop: 200,
+  },
+  attachments: {
+    display: "flex",
+    padding: 20,
+    alignItems: "stretch",
+    flex: 1,
+  },
+  attachmentsTitle: {
+    ...kstyles.text,
+    color: kstyles.textDark,
+    marginBottom: 8,
+  },
+  attachmentsRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+  attachmentsImage: {
+    width: "47%",
+    borderRadius: 8,
   },
 });
 

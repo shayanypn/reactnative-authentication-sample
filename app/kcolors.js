@@ -11,4 +11,7 @@ export default {
   darkBlue: "#333A4D",
   orange: "#E4BB4F",
   darkOrange: "#e4bb4f40",
+
+  textDark: "#2C3143",
+  textGray: "#707070",
 };
