@@ -5,7 +5,7 @@ import AppButton from "../components/Button";
 import Screen from "../components/Screen";
 import kstyles from "../kstyles";
 
-const WelcomeScreen = () => (
+const WelcomeScreen = ({ navigation }) => (
   <Screen style={kstyles.bgDarkBlue}>
     <LinearGradient
       colors={["rgba(0, 0, 0, 0)", "#000000"]}
@@ -28,7 +28,11 @@ const WelcomeScreen = () => (
           icon="google"
         />
         <AppButton title="Sign Up with Email" bgColor={kstyles.green} />
-        <AppButton title="Log In" bgColor={kstyles.secondary} />
+        <AppButton
+          title="Log In"
+          bgColor={kstyles.secondary}
+          onPress={() => navigation.navigate("Signin")}
+        />
         <Text style={styles.bottomText}>Explore the classes</Text>
       </View>
     </LinearGradient>

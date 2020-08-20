@@ -1,7 +1,9 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, ScrollView, View, Text } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
+import { loginWithEmail } from "../services/Firebase";
 import Screen from "../components/Screen";
+import AppButton from "../components/Button";
 import { Form, FormField, SubmitButton } from "../components/Form";
 import kstyles from "../kstyles";
 
@@ -18,11 +20,11 @@ const SigninTitle = () => (
   </View>
 );
 
-const SigninForm = () => (
+const SigninForm = ({ loading, onSubmit }) => (
   <View style={styles.formContainer}>
     <Form
       initialValues={{ email: "", password: "" }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => onSubmit(values)}
     >
       <View>
         <FormField
@@ -41,7 +43,7 @@ const SigninForm = () => (
           secureTextEntry
           textContentType="password"
         />
-        <SubmitButton title="Login" />
+        <SubmitButton loading={loading} title="Login" />
       </View>
     </Form>
   </View>
@@ -57,11 +59,31 @@ const SigninBottom = () => (
   </View>
 );
 
-const SigninScreen = () => {
+const SigninScreen = ({ navigation }) => {
   const [sliderHeight, setSliderHeight] = React.useState(0);
+  const [loading, setLoading] = React.useState(false);
+
+  async function handleOnLogin(values) {
+    const { email, password } = values;
+    setLoading(true);
+    try {
+      await loginWithEmail(email, password);
+      setLoading(false);
+      navigation.navigate("Panel");
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+    }
+  }
 
   return (
     <Screen style={kstyles.bgGray}>
+      <AppButton
+        title=" "
+        icon="arrow-left"
+        style={styles.headBack}
+        onPress={() => navigation.navigate("Home")}
+      />
       <View
         style={styles.head}
         onLayout={(e) => setSliderHeight(e.nativeEvent.layout.height)}
@@ -69,9 +91,11 @@ const SigninScreen = () => {
         <SliderBox images={sliderImages} sliderBoxHeight={sliderHeight} />
       </View>
       <View style={styles.foot}>
-        <SigninTitle />
-        <SigninForm />
-        <SigninBottom />
+        <ScrollView>
+          <SigninTitle />
+          <SigninForm loading={loading} onSubmit={handleOnLogin} />
+          <SigninBottom />
+        </ScrollView>
       </View>
     </Screen>
   );
@@ -82,6 +106,14 @@ const styles = StyleSheet.create({
     flex: 5,
     justifyContent: "center",
     alignItems: "stretch",
+  },
+  headBack: {
+    position: "absolute",
+    top: 25,
+    left: 10,
+    justifyContent: "flex-start",
+    padding: 0,
+    zIndex: 10,
   },
   foot: {
     flex: 7,
@@ -95,6 +127,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 3,
     alignItems: "center",
+    marginBottom: 30,
   },
   formContainer: {
     flex: 7,

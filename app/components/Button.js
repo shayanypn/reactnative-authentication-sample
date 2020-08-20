@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     ...kstyles.text,
   },
   icon: {
-    marginRight: 10,
+    marginRight: 6,
   },
 });
 

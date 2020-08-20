@@ -1,12 +1,14 @@
 import React from "react";
 import { useFormikContext } from "formik";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ActivityIndicator } from "react-native";
 import AppButton from "../Button";
 import kstyles from "../../kstyles";
 
-const SubmitButton = ({ title }) => {
+const SubmitButton = ({ title, loading }) => {
   const { handleSubmit } = useFormikContext();
-  return (
+  return loading ? (
+    <ActivityIndicator style={styles.btn} size="large" />
+  ) : (
     <AppButton
       title={title}
       bgColor={kstyles.secondary}

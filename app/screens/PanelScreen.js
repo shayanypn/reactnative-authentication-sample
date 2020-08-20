@@ -43,13 +43,18 @@ const PanelDescription = () => (
   </View>
 );
 
-const PanelScreen = () => (
+const PanelScreen = ({ navigation }) => (
   <SafeAreaView>
     <ScrollView>
       <ImageBackground source={require("../assets/bg.png")} style={styles.head}>
+        <AppButton
+          title="Back"
+          icon="chevron-left"
+          style={styles.headBack}
+          onPress={() => navigation.navigate("Home")}
+        />
         <Text style={styles.headTitle}>Child’s pose</Text>
         <PanelStatics />
-
         <View style={styles.btnList}>
           <AppButton
             title="Play video"
@@ -105,6 +110,13 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     padding: 10,
     paddingTop: Constants.statusBarHeight,
+  },
+  headBack: {
+    position: "absolute",
+    top: 25,
+    left: 10,
+    justifyContent: "flex-start",
+    padding: 0,
   },
   headStatic: {
     flexDirection: "row",
