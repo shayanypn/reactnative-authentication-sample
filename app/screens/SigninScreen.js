@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, ScrollView, View, Text } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
+import * as Yup from "yup";
 import { loginWithEmail } from "../services/Firebase";
 import Screen from "../components/Screen";
 import AppButton from "../components/Button";
@@ -13,6 +14,17 @@ const sliderImages = [
   "https://dummyimage.com/400x600/9399a5/000000",
 ];
 
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .required("Please enter a registered email")
+    .email()
+    .label("Email"),
+  password: Yup.string()
+    .required()
+    .min(6, "Password must have at least 6 characters")
+    .label("Password"),
+});
+
 const SigninTitle = () => (
   <View style={styles.titleContainer}>
     <Text style={styles.title}>Welcome back</Text>
@@ -24,6 +36,7 @@ const SigninForm = ({ loading, onSubmit }) => (
   <View style={styles.formContainer}>
     <Form
       initialValues={{ email: "", password: "" }}
+      validationSchema={validationSchema}
       onSubmit={(values) => onSubmit(values)}
     >
       <View>
@@ -71,6 +84,10 @@ const SigninScreen = ({ navigation }) => {
       setLoading(false);
       navigation.navigate("Panel");
     } catch (error) {
+      // The simplest way of showing error.
+      // of course we should create a mapper to
+      // extract user friendly text for each error
+      // then show it to user
       console.log(error.message);
       setLoading(false);
     }
