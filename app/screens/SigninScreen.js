@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, ScrollView, View, Text } from "react-native";
+import { StyleSheet, ScrollView, View, Text, Alert } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import * as Yup from "yup";
 import { loginWithEmail } from "../services/Firebase";
@@ -28,7 +28,7 @@ const validationSchema = Yup.object().shape({
 const SigninTitle = () => (
   <View style={styles.titleContainer}>
     <Text style={styles.title}>Welcome back</Text>
-    <Text style={styles.description}>Login to your account</Text>
+    <Text style={kstyles.textGray}>Login to your account</Text>
   </View>
 );
 
@@ -66,7 +66,7 @@ const SigninBottom = () => (
   <View style={styles.forgetContainer}>
     <Text style={styles.forgetTitle}>Forgot your password?</Text>
     <View style={styles.btnSignup}>
-      <Text style={styles.btnSignupText}>Don't have an account?</Text>
+      <Text style={kstyles.textGray}>Don't have an account?</Text>
       <Text style={styles.btnSignupTextSignup}> Sign up</Text>
     </View>
   </View>
@@ -88,7 +88,9 @@ const SigninScreen = ({ navigation }) => {
       // of course we should create a mapper to
       // extract user friendly text for each error
       // then show it to user
-      console.log(error.message);
+      Alert.alert("Sign in problem", error.message, [{ text: "OK" }], {
+        cancelable: false,
+      });
       setLoading(false);
     }
   }
@@ -168,19 +170,11 @@ const styles = StyleSheet.create({
     ...kstyles.textH3,
     color: kstyles.dark,
   },
-  description: {
-    ...kstyles.text,
-    color: kstyles.gray,
-  },
   btnSignup: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     padding: 20,
-  },
-  btnSignupText: {
-    ...kstyles.text,
-    color: kstyles.gray,
   },
   btnSignupTextSignup: {
     ...kstyles.text,

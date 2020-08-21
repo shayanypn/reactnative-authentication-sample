@@ -22,6 +22,11 @@ export default {
   text: {
     ...defualtText,
   },
+  textLightDark: {
+    ...defualtText,
+    color: kcolors.lightDark,
+    marginBottom: 8,
+  },
   textH1: {
     ...defualtText,
     fontWeight: "bold",

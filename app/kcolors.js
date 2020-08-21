@@ -5,13 +5,12 @@ export default {
   green: "#5BC58B",
   gray: "rgba(0, 0, 0, 0.4)",
   lightGray: "rgba(142, 142, 147, 0.12)",
+  lighterGray: "#707070",
   dark: "#0A1F44",
-  lightDark: "#767B8F",
+  lightDark: "#2C3143",
+  lighterDark: "#767B8F",
   black: "#000000",
   darkBlue: "#333A4D",
   orange: "#E4BB4F",
   darkOrange: "#e4bb4f40",
-
-  textDark: "#2C3143",
-  textGray: "#707070",
 };

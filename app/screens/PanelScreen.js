@@ -32,7 +32,7 @@ const PanelStatics = () => (
 
 const PanelDescription = () => (
   <View style={styles.description}>
-    <Text style={styles.descriptionTitle}>Description</Text>
+    <Text style={kstyles.textLightDark}>Description</Text>
     <Text style={styles.descriptionText}>
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
       eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -74,7 +74,7 @@ const PanelScreen = ({ navigation }) => (
       </ImageBackground>
       <PanelDescription />
       <View style={styles.attachments}>
-        <Text style={styles.attachmentsTitle}>Attachments</Text>
+        <Text style={kstyles.textLightDark}>Attachments</Text>
         <View style={styles.attachmentsRow}>
           <Image
             style={styles.attachmentsImage}
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   headStaticTitle: {
     ...kstyles.text,
     fontSize: 10,
-    color: kstyles.lightDark,
+    color: kstyles.lighterDark,
     marginBottom: 3,
   },
   headStaticContent: {
@@ -149,13 +149,8 @@ const styles = StyleSheet.create({
   },
   descriptionTitle: {
     ...kstyles.text,
-    color: kstyles.textDark,
+    color: kstyles.lightDark,
     marginBottom: 8,
-  },
-  descriptionText: {
-    ...kstyles.text,
-    color: kstyles.textGray,
-    fontSize: 14,
   },
   headTitle: {
     ...kstyles.textH3,
@@ -167,11 +162,6 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: "stretch",
     flex: 1,
-  },
-  attachmentsTitle: {
-    ...kstyles.text,
-    color: kstyles.textDark,
-    marginBottom: 8,
   },
   attachmentsRow: {
     display: "flex",
