@@ -44,7 +44,7 @@ const PanelDescription = () => (
 );
 
 const PanelScreen = ({ navigation }) => (
-  <SafeAreaView>
+  <View style={styles.container}>
     <ScrollView>
       <ImageBackground source={require("../assets/bg.png")} style={styles.head}>
         <AppButton
@@ -97,7 +97,7 @@ const PanelScreen = ({ navigation }) => (
         </View>
       </View>
     </ScrollView>
-  </SafeAreaView>
+  </View>
 );
 
 const styles = StyleSheet.create({

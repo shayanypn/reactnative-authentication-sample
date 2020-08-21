@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, ScrollView, View, Text, Alert } from "react-native";
+import { StyleSheet, View, Text, Alert } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import * as Yup from "yup";
 import { loginWithEmail } from "../services/Firebase";
@@ -111,14 +111,13 @@ const SigninScreen = ({ navigation }) => {
           images={sliderImages}
           sliderBoxHeight={sliderHeight}
           autoplay
+          circleLoop
         />
       </View>
       <View style={styles.foot}>
-        <ScrollView>
-          <SigninTitle />
-          <SigninForm loading={loading} onSubmit={handleOnLogin} />
-          <SigninBottom />
-        </ScrollView>
+        <SigninTitle />
+        <SigninForm loading={loading} onSubmit={handleOnLogin} />
+        <SigninBottom />
       </View>
     </Screen>
   );
@@ -126,7 +125,7 @@ const SigninScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   head: {
-    flex: 5,
+    flex: 4,
     justifyContent: "center",
     alignItems: "stretch",
   },
@@ -139,7 +138,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   foot: {
-    flex: 7,
+    flex: 8,
     justifyContent: "center",
     alignItems: "stretch",
     padding: 20,
@@ -154,7 +153,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 7,
-    marginBottom: 30,
+    marginBottom: 20,
     paddingLeft: 10,
     paddingRight: 10,
   },
