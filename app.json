@@ -15,7 +15,9 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "usesAppleSignIn": true,
+      "supportsTablet": true,
+      "bundleIdentifier": "com.shayanypn.reactnative-authentication-sample"
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
