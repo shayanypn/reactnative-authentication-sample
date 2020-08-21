@@ -1,13 +1,23 @@
 import React from "react";
-import { StyleSheet, View, Text, AsyncStorage } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import * as AppAuth from "expo-app-auth";
 import AppButton from "../components/Button";
 import Screen from "../components/Screen";
+import { getCachedAuthAsync, signInAsync } from "../services/AppAuth";
 import kstyles from "../kstyles";
 
 const WelcomeScreen = ({ navigation }) => {
   let [authState, setAuthState] = React.useState(null);
+
+  async function handleGoogleSignIn() {
+    const _authState = await signInAsync();
+    // beside this validation I also should
+    // check the result of google auth to see
+    // if anything went well or not
+    if (_authState.state !== "error") {
+      navigation.navigate("Panel");
+    }
+  }
 
   React.useEffect(() => {
     (async () => {
@@ -39,10 +49,7 @@ const WelcomeScreen = ({ navigation }) => {
             title="Sign In with Google"
             bgColor={kstyles.primary}
             icon="google"
-            onPress={async () => {
-              const _authState = await signInAsync();
-              console.log(_authState);
-            }}
+            onPress={handleGoogleSignIn}
           />
           <AppButton title="Sign Up with Email" bgColor={kstyles.green} />
           <AppButton
@@ -90,62 +97,3 @@ const styles = StyleSheet.create({
 });
 
 export default WelcomeScreen;
-
-let config = {
-  issuer: "https://accounts.google.com",
-  scopes: ["openid", "profile"],
-  /* This is the CLIENT_ID generated from a Firebase project */
-  clientId:
-    "39909900924-3encunjn5ts42gmaanva3thli128ibs7.apps.googleusercontent.com",
-};
-
-let StorageKey = "@MyApp:CustomGoogleOAuthKey";
-
-export async function signInAsync() {
-  let authState = await AppAuth.authAsync(config);
-  await cacheAuthAsync(authState);
-  console.log("signInAsync", authState);
-  return authState;
-}
-
-async function cacheAuthAsync(authState) {
-  return await AsyncStorage.setItem(StorageKey, JSON.stringify(authState));
-}
-
-export async function getCachedAuthAsync() {
-  let value = await AsyncStorage.getItem(StorageKey);
-  let authState = JSON.parse(value);
-  console.log("getCachedAuthAsync", authState);
-  if (authState) {
-    if (checkIfTokenExpired(authState)) {
-      return refreshAuthAsync(authState);
-    } else {
-      return authState;
-    }
-  }
-  return null;
-}
-
-function checkIfTokenExpired({ accessTokenExpirationDate }) {
-  return new Date(accessTokenExpirationDate) < new Date();
-}
-
-async function refreshAuthAsync({ refreshToken }) {
-  let authState = await AppAuth.refreshAsync(config, refreshToken);
-  console.log("refreshAuth", authState);
-  await cacheAuthAsync(authState);
-  return authState;
-}
-
-export async function signOutAsync({ accessToken }) {
-  try {
-    await AppAuth.revokeAsync(config, {
-      token: accessToken,
-      isClientIdProvided: true,
-    });
-    await AsyncStorage.removeItem(StorageKey);
-    return null;
-  } catch (e) {
-    alert(`Failed to revoke token: ${e.message}`);
-  }
-}

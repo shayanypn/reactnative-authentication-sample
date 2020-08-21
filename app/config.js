@@ -7,3 +7,10 @@ export const FirebaseConfig = {
   messagingSenderId: "39909900924",
   appId: "1:39909900924:web:ddae9341e991d54c96bff9",
 };
+
+export const AppAuthConfig = {
+  issuer: "https://accounts.google.com",
+  scopes: ["openid", "profile"],
+  clientId:
+    "39909900924-3encunjn5ts42gmaanva3thli128ibs7.apps.googleusercontent.com",
+};

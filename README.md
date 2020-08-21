@@ -14,6 +14,10 @@ Simple application to show an simple entry screen and authentication written in 
 
 Firebase config located in `~/src/config.js`
 
+For `Log In` part you can use below credential
+`username: shayanypn@gmail.com`
+`password: 1234566789`
+
 ## Interesting Code
 
 To help guide you through the interesting pieces of this implementation note the following.
