@@ -88,7 +88,11 @@ const SigninScreen = ({ navigation }) => {
         style={styles.head}
         onLayout={(e) => setSliderHeight(e.nativeEvent.layout.height)}
       >
-        <SliderBox images={sliderImages} sliderBoxHeight={sliderHeight} />
+        <SliderBox
+          images={sliderImages}
+          sliderBoxHeight={sliderHeight}
+          autoplay
+        />
       </View>
       <View style={styles.foot}>
         <ScrollView>
